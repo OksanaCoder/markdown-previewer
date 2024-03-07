@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import ReactMarkdown from "react-markdown";
+import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Row, Col } from "react-bootstrap";
 
 function App() {
+  const [markdown, setMarkdown] = useState(`
+  # Heading 1
+  #### Heading
+  * 1234
+`);
+  const handleChange = (e) => {
+    setMarkdown(e.target.value);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Row className="p-5">
+      <Col lg={6} md={6} sm={12} xs={12}>
+        <h5>Editor:</h5>
+        <textarea
+          value={markdown}
+          onChange={handleChange}
+          className="editor"
+        ></textarea>
+      </Col>
+      <Col lg={6} md={6} sm={12} xs={12}>
+        <h5>Preview:</h5>
+        <ReactMarkdown className="preview">{markdown}</ReactMarkdown>
+      </Col>
+    </Row>
   );
 }
 
